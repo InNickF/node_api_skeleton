@@ -1,0 +1,29 @@
+{
+  "name": "es6-boilerplate",
+  "version": "1.0.0",
+  "description": "Node ES6 boilerplate",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsc-watch --onSuccess \"node ./dist/server.js\"",
+    "start": "npx pm2 start pm2.yaml",
+    "postinstall": "npx tsc"
+  },
+  "author": "Richard Munoz",
+  "license": "ISC",
+  "dependencies": {
+    "@types/compression": "^1.0.1",
+    "@types/cors": "^2.8.6",
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^4.17.1",
+    "@types/node": "^12.11.2",
+    "axios": "^0.19.0",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "pm2": "^4.1.2",
+    "tsc-watch": "^4.0.0",
+    "typescript": "^3.6.4"
+  }
+}
