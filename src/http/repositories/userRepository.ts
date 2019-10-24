@@ -1,6 +1,5 @@
 import { getRepository } from "typeorm";
 import { User } from "../entities/User";
-import { HTTP422Error } from "../../utils/httpErrors";
 
 export const findById = async (id: number) => {
   const userRepository = getRepository(User);
@@ -14,16 +13,26 @@ export const findByUsername = async (username: string) => {
   return user;
 };
 
-export const register = async (userData: User) => {
-  if (await findByUsername(userData.username)) {
-    throw new HTTP422Error("Username already exists");
-  }
+// TODO: fix spread operator in register to save new user
 
-  const user = new User();
-  user.username = userData.username;
-  user.password = userData.password;
-  user.role = userData.role;
-  user.hashPassword();
+export const register = async (userData: User)  => {
+  // let user = new User();
+  // user.username = userData.username;
+  // user.password = userData.password;
+  // user.role = userData.role;
+
+  // user = { ...userData };
+
+  userData.hashPassword();
   const userRepository = getRepository(User);
+  await userRepository.save(userData);
+};
+
+export const changePassword = async (id: number, password: string) => {
+  const userRepository = getRepository(User);
+  let user = new User();
+  user = await findById(id);
+  user.password = password;
+  user.hashPassword();
   await userRepository.save(user);
 };
