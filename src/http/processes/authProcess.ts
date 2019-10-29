@@ -13,7 +13,7 @@ export const login = async (username: string, password: string) => {
   const user: User = await userRepository.findByUsername(username);
 
   // check if password match
-  if (!user.checkIfUnencryptedPasswordIsValid(password)) {
+  if (!(await user.checkIfUnencryptedPasswordIsValid(password))) {
     throw new HTTP401Error("Password is incorrect");
   }
 
@@ -26,19 +26,17 @@ export const login = async (username: string, password: string) => {
   return { status: "ok", message: "Successful login", token, expiresIn };
 };
 
-export const changePassword = async (res, password: string, newPassword: string) => {
-  // get id from JWT
-  const id = res.locals.jwtPayload.userId;
-  const user: User = await userRepository.findById(id);
+export const changePassword = async (userId: number, password: string, newPassword: string) => {
+  const user: User = await userRepository.findById(userId);
 
   // check if old password matches
-  if (!user.checkIfUnencryptedPasswordIsValid(password)) {
+  if (!(await user.checkIfUnencryptedPasswordIsValid(password))) {
     throw new HTTP401Error("Password is incorrect");
   }
 
   if (password === newPassword) {
     throw new HTTP401Error("New password can't be the same as old password");
   }
-  await userRepository.changePassword(id, newPassword);
+  await userRepository.changePassword(userId, newPassword);
   return { status: "ok", message: "Password changed successfully" };
 };
