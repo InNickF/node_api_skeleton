@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import * as jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import config from "../../config/config";
 
 export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
@@ -17,6 +17,10 @@ export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
     res.setHeader("token", newToken);
     next();
   } catch (error) {
-    res.status(401).send({ status: "fail", error: "HTTP401Error", mesage: error.message });
+    res
+      .status(401)
+      .send({ status: "fail", error: "HTTP401Error", mesage: error.message });
   }
 };
+
+// TODO: add refresh token functionality
