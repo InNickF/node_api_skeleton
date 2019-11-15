@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "19a96905-183a-4b44-8a8f-9c6449775b39",
+		"_postman_id": "81a0418f-99db-4bec-83ef-3e127d43eb75",
 		"name": "NODE_SKELETON",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -19,7 +19,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"username\": \"richard\",\n\t\"password\": \"12345678\",\n\t\"role\": \"USER\"\n}",
+					"raw": "{\n\t\"username\": \"richard1\",\n\t\"password\": \"12345678\",\n\t\"role\": \"USER\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -69,7 +69,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"username\": \"richard\",\n\t\"password\": \"1234\"\n}",
+					"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"123456\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -158,6 +158,134 @@
 					]
 				},
 				"description": "rules:\n- password: min:4, max:20\n- newPassword: min:4, max:20"
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/auth/login/developer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ed3a137c-8eaa-4ebd-9121-18957f7ad023",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"AccessToken\", jsonData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"developer\",\n\t\"password\": \"developer\"\n}"
+				},
+				"url": {
+					"raw": "{{node_skeleton}}/api/v1/auth/login",
+					"host": [
+						"{{node_skeleton}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/settings",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AccessToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{node_skeleton}}/api/v1/settings",
+					"host": [
+						"{{node_skeleton}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"settings"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/settings/update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "651fa37f-b266-45dc-b828-acbe7cdd7928",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AccessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"menuColor\": \"#256ba7\", \n\t\"systemName\": \"SISTEMA MÉDICO\", \n\t\"colorTexto\": \"#FFFFFF\", \n\t\"startFooter\": \"SISTEMA MÉDICO FOOTER\", \n\t\"systemMotto\": \"SISTEMA MÉDICO LEMA\", \n\t\"menuColorActive\": \"#004179\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{node_skeleton}}/api/v1/settings/update",
+					"host": [
+						"{{node_skeleton}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"settings",
+						"update"
+					]
+				}
 			},
 			"response": []
 		}

@@ -1,30 +1,28 @@
 import {
-    Entity,
-    PrimaryGeneratedColumn,
-    Column,
-    Unique,
-    CreateDateColumn,
-    UpdateDateColumn
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn
 } from "typeorm";
 
 @Entity("settings")
 export class Setting {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column({ type: "varchar", length: 50 })
-    key: string;
+  @Column({ type: "varchar", length: 50 })
+  key: string;
 
-    @Column({ type: 'text' })
-    json_value: string;
+  @Column({ type: "text", name: "json_value" })
+  jsonValue: string;
 
-    @Column({ type: "text" })
-    description: string;
+  @Column({ type: "text" })
+  description: string;
 
-    @CreateDateColumn({ name: "created_at" })
-    createdAt: Date;
+  @CreateDateColumn({ name: "created_at" })
+  createdAt: Date;
 
-    @UpdateDateColumn({ name: "updated_at" })
-    updatedAt: Date;
-
+  @UpdateDateColumn({ name: "updated_at" })
+  updatedAt: Date;
 }
