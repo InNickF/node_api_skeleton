@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner, getRepository } from "typeorm";
 import { User, userRole } from "../entities/User";
 
-export class createDeveloperUser1573828161025 implements MigrationInterface {
+export class CreateDeveloperUser1573828161025 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<any> {
     const user = new User();
     user.username = "developer";

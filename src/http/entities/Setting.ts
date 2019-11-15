@@ -14,7 +14,7 @@ export class Setting {
   @Column({ type: "varchar", length: 50 })
   key: string;
 
-  @Column({ type: "text", name: "json_value" })
+  @Column({ type: "json", name: "json_value" })
   jsonValue: string;
 
   @Column({ type: "text" })

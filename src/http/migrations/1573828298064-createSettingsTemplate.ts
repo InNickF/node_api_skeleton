@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner, getRepository } from "typeorm";
 import { Setting } from "../entities/Setting";
 
-export class createSettingsTemplate1573828298064 implements MigrationInterface {
+export class CreateSettingsTemplate1573828298064 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<any> {
     const setting = new Setting();
     setting.key = "ui_menu_styles";
