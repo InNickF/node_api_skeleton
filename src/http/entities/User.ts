@@ -11,7 +11,8 @@ import IUser from "../interfaces/IUser";
 
 export enum userRole {
   ADMIN = "ADMIN",
-  USER = "USER"
+  USER = "USER",
+  DEVELOPER = "DEVELOPER"
 }
 
 @Entity()
